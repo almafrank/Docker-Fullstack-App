@@ -9,7 +9,7 @@ Creating a fullstack application with docker container and traefik. In the appli
 Docker-Fullstack-App/
 └── traefik/
     ├── backend-api
-    │   ├── app.pyit status
+    │   ├── app.py
     │   ├── Dockerfile
     │   └── requirements.txt
     ├── db-postgres
