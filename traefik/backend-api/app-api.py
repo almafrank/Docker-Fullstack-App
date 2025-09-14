@@ -5,8 +5,8 @@ import os
 
 app=Flask(__name__)
 redis_host = os.getenv("DB_REDIS_HOST", "redis")
-redis_post = int(os.getenv("REDIS_POST", 6379)) #web post
-redis=Redis(host=redis_host, post=redis_post,decode_responses=True)
+redis_port = int(os.getenv("REDIS_POST", 6379)) #web post
+redis=Redis(host=redis_host, port=redis_port,decode_responses=True)
 
 # homepage 
 @app.route('/')

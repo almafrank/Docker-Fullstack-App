@@ -1,2 +1,56 @@
+networks:
+    proxy:
+      driver: bridge
+    db:
+      driver: bridge
 
+
+services:
+  traefik:
+    image: traefik:v3.5
+    container_name: traefik
+    command:
+      - --api.dashboard=true
+      - --providers.docker.exposedbydefault=false
+      - --api.insecure=true        # Aktivera Traefiks dashboard (ej för produktion)
+      - --providers.docker=true    # Läs labels från Docker
+      - --entrypoints.web.address=:80 # Entrypoint på port 80
+    ports:
+      - "80:80"
+      - "8080:8080"                  # Dashboard
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy
+
+  backend-api:
+    build: ./backend-api   # mappen där Dockerfile ligger. Du vill bygga och köra lokalt snabbt, kunna ändra kod och testa direkt.
+    container_name: traefik-backend-api
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=proxy
+      - traefik.http.routers.backend-api.entrypoints=web
+      - traefik.http.routers.backend-api.rule=Host(`backend-api.localhost`)
+      - traefik.http.services.backend-api.loadbalancer.server.port=8000
+    volumes:
+      - ./backend-api:/code
+    depends_on:
+      - redis
+    environment:
+      DB_REDIS_HOST: redis
+      REDIS_PORT: 6379
+
+    networks:
+      - proxy
+      - db
+  
+
+   #Db redis container
+  redis:
+    image: redislabs/redismod
+    container_name: traefik-redis
+    #ports:
+    #  - '6379:6379'
+    networks:
+     - db #existerar i egen nätverk
   
