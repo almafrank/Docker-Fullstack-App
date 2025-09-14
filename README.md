@@ -12,9 +12,6 @@ Docker-Fullstack-App/
     │   ├── app.py
     │   ├── Dockerfile
     │   └── requirements.txt
-    ├── db-postgres
-    │   ├── Dockerfile
-    │   └── requirements.txt
     ├── frontend
     │   ├── index.html
     │   └── Dockerfile
