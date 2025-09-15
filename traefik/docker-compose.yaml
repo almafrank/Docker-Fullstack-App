@@ -47,7 +47,7 @@ services:
 
    #Db redis container
   redis:
-    image: redislabs/redismod
+    image: redislabs/redismod #konto på redis
     container_name: traefik-redis
     #ports:
     #  - '6379:6379'
