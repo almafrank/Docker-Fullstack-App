@@ -25,6 +25,7 @@ services:
 
   backend-api:
     build: ./backend-api   # mappen där Dockerfile ligger. Du vill bygga och köra lokalt snabbt, kunna ändra kod och testa direkt.
+    image: backend-api:latest # Man kan alltid sätta namn latest när man skapar image
     container_name: traefik-backend-api
     labels:
       - traefik.enable=true
