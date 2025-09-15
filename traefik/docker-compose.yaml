@@ -1,8 +1,8 @@
 networks:
     proxy:
-      driver: bridge
+      name: proxy
     db:
-      driver: bridge
+      name: db
 
 
 services:

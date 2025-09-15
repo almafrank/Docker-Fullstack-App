@@ -11,7 +11,7 @@ redis=Redis(host=redis_host, port=redis_port,decode_responses=True)
 # homepage 
 @app.route('/')
 def home():
-    return "Message Link Site!!"
+    return "Welcome"
 
 
 
